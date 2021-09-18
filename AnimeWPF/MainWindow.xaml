@@ -1,0 +1,53 @@
+﻿<Window x:Class="AnimeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimeWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Background >
+        <ImageBrush  ImageSource="/Background/Hai.jpg"/>
+    </Window.Background>
+
+    <Grid>
+        <Button Content="Watchlist" HorizontalAlignment="Left" Margin="40,34,0,0" VerticalAlignment="Top" Height="65" Width="225" BorderBrush="#FF5D5D5D" Foreground="White" Background="Black" FontSize="25" FontFamily="Harlow Solid Italic" FontWeight="Normal" BorderThickness="5" Click="ButtonWatchlist_Click"/>
+        <Button Content="UPDATE" HorizontalAlignment="Left" Margin="914,575,0,0" VerticalAlignment="Top" Height="37" Width="106" Background="#FF7CFF5F" FontFamily="Arial Black" Click="ButtonUpdate_Click"/>
+        <Button Content="DELETE" HorizontalAlignment="Left" Margin="914,612,0,0" VerticalAlignment="Top" Height="37" Width="106" FontFamily="Arial Black" Background="#FFFF5454" Click="ButtonDelete_Click"/>
+        <Button Content="RESET" HorizontalAlignment="Left" Margin="1019,575,0,0" VerticalAlignment="Top" Height="74" Width="55" FontFamily="Arial Black" Background="#FF749AFF" Click="ButtonReset_Click"/>
+        <Button Content="CREATE" HorizontalAlignment="Left" Margin="855,575,0,0" VerticalAlignment="Top" Height="74" Width="59" FontFamily="Arial Black" Background="#FFEAFF74" Click="ButtonCreate_Click"/>
+
+        <!--SUMMARY BACKGROUND-->
+        <Label Grid.RowSpan="1"  Margin="402,61,517,335" Background="Black" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8"></Label>
+
+        <TextBox x:Name="TextId" IsReadOnly="True" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,142,915,491"></TextBox>
+        <TextBox x:Name="TextPicture" IsReadOnly="True" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,614,915,17"></TextBox>
+        <TextBox x:Name="TextAnimeName"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,216,915,415"></TextBox>
+        <TextBox x:Name="TextEpisode"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,280,915,350"></TextBox>
+        <TextBox x:Name="TextReleaseYear"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,347,915,285"></TextBox>
+        <TextBox x:Name="TextStatus"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,416,915,215"></TextBox>
+        <TextBox x:Name="TextRank"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,483,915,145"></TextBox>
+        <TextBox x:Name="TextMore"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,551,915,85"></TextBox>
+        <TextBox x:Name="TextSummary"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="305,374,410,28" TextWrapping="WrapWithOverflow" FontSize="14"></TextBox>
+
+        <ListBox x:Name="ListBoxAnimeTitles" SelectionChanged="ListBoxProfile_SelectionChanged" Background="Black" BorderThickness="5" BorderBrush="#FFC7C7C7" Foreground="#DDFFFFFF" Opacity="0.8" RenderTransformOrigin="0.5,0.5" Margin="810,163,30,115" FontSize="18"/>
+
+        <Label x:Name="LabelId" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="45,120,1084,500" FontSize="15" >ID</Label>
+        <Label x:Name="LabelPicture" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,593,1063,27"  FontSize="15">Picture</Label>
+        <Label x:Name="LabelName" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,193,1066,428"  FontSize="15">Name</Label>
+        <Label x:Name="LabelEpisode" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,261,1035,363"  FontSize="15">Episode</Label>
+        <Label x:Name="LabelReleaseYear" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,326,1030,296"  FontSize="15">Release Year</Label>
+        <Label x:Name="LabelStatus" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="43,393,873,240"  FontSize="15">Status (Completed or Ongoing)</Label>
+        <Label x:Name="LabelRank" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="45,461,1070,159"  FontSize="15">Rank</Label>
+        <Label x:Name="LabelMore" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,530,935,90"  FontSize="15">More (Yes or No)</Label>
+        <Label x:Name="LabelSummary" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="320,349,775,270" FontSize="15" >Summary</Label>
+        <Label x:Name="LabelSearch" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="810,54,277,559" FontSize="15" >Search...</Label>
+        <Label x:Name="LabelAnime" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Harlow Solid Italic" Background="{x:Null}" Margin="810,130,277,480" FontSize="20" RenderTransformOrigin="0.575,0.47" >Anime</Label>
+
+        <Image Name="imgDynamic" Margin="438,65,539,341"/>
+
+        <TextBox x:Name="TextSearch" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" RenderTransformOrigin="0.5,0.5" Margin="810,75,30,544" TextChanged="TextSearch_TextChanged" Tag="Search..." FontSize="18">
+        </TextBox>
+    </Grid>
+</Window>

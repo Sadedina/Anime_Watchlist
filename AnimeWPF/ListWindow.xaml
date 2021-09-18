@@ -1,0 +1,139 @@
+﻿<Window x:Class="AnimeWPF.ListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimeWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Background >
+        <ImageBrush  ImageSource="/Background/ace1.jpg"/>
+    </Window.Background>
+
+    <Grid>
+        <Button Content="Add To List" HorizontalAlignment="Left" Margin="40,34,0,0" VerticalAlignment="Top" Height="65" Width="225" BorderBrush="#FF5D5D5D" Foreground="White" Background="Black" FontSize="25" FontFamily="Harlow Solid Italic" FontWeight="Normal" BorderThickness="5" Click="ButtonAnime_Click"/>
+
+        <ListView x:Name="animeTable" Margin="394,94,35,240" Background="Black" BorderBrush="#FFFFF977" Opacity="0.8" Foreground="#FF979797" SelectionChanged="animeTable_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="{Binding Date}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="300"/>
+                    <GridViewColumn Header="Episode" DisplayMemberBinding="{Binding Episode}" Width="80"/>
+                    <GridViewColumn Header="Watch" DisplayMemberBinding="{Binding Watch}" Width="100"/>
+                    <GridViewColumn Header="Ratings" Width="90">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="{Binding Ratings}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Status" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="{Binding Status}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Upcoming" DisplayMemberBinding="{Binding More}" Width="80"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="TextEpisode" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FF707070" Foreground="White" Opacity="0.8" Margin="64,250,956,375" FontSize="18"></TextBox>
+        <TextBox x:Name="TextSearch" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="925,60,35,573" TextChanged="TextSearch_TextChanged" Tag="Search..."></TextBox>
+
+
+        <Button HorizontalAlignment="Left" Margin="260,122,0,0" VerticalAlignment="Top" Height="31" Width="30" Background="{x:Null}" FontFamily="Arial Black" Click="ButtonRateDelete_Click" Opacity="0.5" BorderBrush="{x:Null}">
+            <Image Source="/Background/X.png" Height="20" Width="21" />
+        </Button>
+        <Button Content="1" HorizontalAlignment="Left" Margin="42,122,0,0" VerticalAlignment="Top" Height="31" Width="43" Background="#FFFF5F5F" FontFamily="Arial Black" Click="ButtonRate1_Click" Opacity="0.8"/>
+        <Button Content="2" HorizontalAlignment="Left" Margin="85,122,0,0" VerticalAlignment="Top" Height="31" Width="43" Background="#FFFFAA5F" FontFamily="Arial Black" Click="ButtonRate2_Click" Opacity="0.8"/>
+        <Button Content="3" HorizontalAlignment="Left" Margin="128,122,0,0" VerticalAlignment="Top" Height="31" Width="44" Background="#FFFFD25F" FontFamily="Arial Black" Click="ButtonRate3_Click" Opacity="0.8"/>
+        <Button Content="4" HorizontalAlignment="Left" Margin="172,122,0,0" VerticalAlignment="Top" Height="31" Width="44" Background="#FFDCFF5F" FontFamily="Arial Black" Click="ButtonRate4_Click" Opacity="0.8"/>
+        <Button Content="5" HorizontalAlignment="Left" Margin="216,122,0,0" VerticalAlignment="Top" Height="31" Width="44" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonRate5_Click" Opacity="0.8"/>
+        <Button HorizontalAlignment="Left" Margin="260,186,0,0" VerticalAlignment="Top" Height="30" Width="30" Background="{x:Null}" FontFamily="Arial Black" Click="ButtonWatchDelete_Click" Opacity="0.5" BorderBrush="{x:Null}">
+            <Image Source="/Background/X.png" Height="20" Width="21" />
+        </Button>
+        <Button Content="To Watch" HorizontalAlignment="Left" Margin="42,186,0,0" VerticalAlignment="Top" Height="31" Width="72" Background="#FFFF5F5F" FontFamily="Arial Black" Click="ButtonToWatchSet_Click" Opacity="0.79"/>
+        <Button Content="Watching" HorizontalAlignment="Left" Margin="114,186,0,0" VerticalAlignment="Top" Height="31" Width="76" Background="#FFFFD25F" FontFamily="Arial Black" Click="ButtonWatchingSet_Click" Opacity="0.8"/>
+        <Button Content="Watched" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Height="31" Width="70" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonWatchedSet_Click" Opacity="0.79"/>
+        <Button Content="       RESET" HorizontalAlignment="Left" Margin="827,66,0,0" VerticalAlignment="Top" Height="23" Width="83" Background="#FFF3FF5F" FontFamily="Arial Black" Click="ButtonFilterReset_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
+        <Button Content="Rate" HorizontalAlignment="Left" Margin="467,66,0,0" VerticalAlignment="Top" Height="23" Width="71" Background="#FFFF5FF4" FontFamily="Arial Black" Click="ButtonFilterRate_Click" Opacity="0.8" FontSize="10"/>
+        <Button Content="   To Watch" HorizontalAlignment="Left" Margin="549,66,0,0" VerticalAlignment="Top" Height="23" Width="82" Background="#FF5FFFFC" FontFamily="Arial Black" Click="ButtonFilterToWatch_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
+        <Button Content="   Watching" HorizontalAlignment="Left" Margin="642,66,0,0" VerticalAlignment="Top" Height="23" Width="82" Background="#FF5FFFDA" FontFamily="Arial Black" Click="ButtonFilterWatching_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
+        <Button Content="   Watched" HorizontalAlignment="Left" Margin="735,66,0,0" VerticalAlignment="Top" Height="24" Width="82" Background="#FF5FFFA6" FontFamily="Arial Black" Click="ButtonFilterWatched_Click" Opacity="0.8" HorizontalContentAlignment="Left" Padding="1,1,-3,1" FontSize="10"/>
+        <Button Content="Set" HorizontalAlignment="Left" Margin="228,250,0,0" VerticalAlignment="Top" Height="37" Width="32" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonEpisodeUpdate_Click" Opacity="0.8"/>
+        <Button HorizontalAlignment="Left" Margin="42,250,0,0" VerticalAlignment="Top" Height="19" Width="23" Background="#FF5FD4FF" FontFamily="Arial Black" Click="ButtonEpisodeUp_Click" Opacity="0.8">
+            <Image Source="/Background/Arrow.png" RenderTransformOrigin="0.5,0.5" Height="14" Width="24" >
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="42,269,0,0" VerticalAlignment="Top" Height="18" Width="23" Background="#FF5F6CFF" FontFamily="Arial Black" Click="ButtonEpisodeDown_Click" Opacity="0.8">
+            <Image Source="/Background/Arrow.png" RenderTransformOrigin="0.5,0.5" Height="14" Width="24" >
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="260,380,0,0" VerticalAlignment="Top" Height="28" Width="30" Background="{x:Null}" FontFamily="Arial Black" Click="ButtonUpToDateDelete_Click" Opacity="0.5" BorderBrush="{x:Null}">
+            <Image Source="/Background/X.png" Height="20" Width="21" />
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="260,320,0,0" VerticalAlignment="Top" Height="27" Width="30" Background="{x:Null}" FontFamily="Arial Black" Click="ButtonMoreDelete_Click" Opacity="0.504" BorderBrush="{x:Null}">
+            <Image Source="/Background/X.png" Height="20" Width="21" />
+        </Button>
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="150,320,0,0" VerticalAlignment="Top" Height="27" Width="110" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonMoreYes_Click" Opacity="0.8"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="42,320,0,0" VerticalAlignment="Top" Height="27" Width="108" Background="#FFFF5F5F" FontFamily="Arial Black" Click="ButtonMoreNo_Click" Opacity="0.795"/>
+        <Button Content="Up To Date" HorizontalAlignment="Left" Margin="43,380,0,0" VerticalAlignment="Top" Height="28" Width="217" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonUpToDate_Click" Opacity="0.8"/>
+
+        <Image Source="/Background/Number.png" Margin="602,55,535,579" Opacity="0.9" />
+        <Image Source="/Background/Number.png" Margin="698,55,444,579" Opacity="0.9" />
+        <Image Source="/Background/Number.png" Margin="792,55,355,579" Opacity="0.9" />
+        <Image Source="/Background/Number.png" Margin="886,55,261,579" Opacity="0.9" />
+
+
+        <Label x:Name="LabelRating" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="42,100,1077,521"  FontSize="15">Rate</Label>
+        <Label x:Name="LabelWatching" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="42,163,1068,463"  FontSize="15">View</Label>
+        <Label x:Name="LabelEpisode" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="40,226,1007,397"  FontSize="15">Current Episode</Label>
+        <Label x:Name="LabelMore" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="43,298,1066,331"  FontSize="15">More</Label>
+        <Label x:Name="LabelDetails" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="42,427,1038,201"  FontSize="15">Details</Label>
+        <Label x:Name="LabelSearch" Grid.RowSpan="1" FontWeight="Bold" Foreground="White" FontFamily="Arial" Background="{x:Null}" Margin="925,36,187,585"  FontSize="15">Search...</Label>
+
+
+        <Label x:Name="ListBoxInformation" Margin="40,449,35,10" Background="Black" BorderThickness="5" Padding="0" BorderBrush="#FFD0D7DD" Foreground="#DDFFFFFF" Opacity="0.8"/>
+
+
+        <TextBox x:Name="NumberToWatch" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC31A1A" Margin="612,62,546,585" IsEnabled="False" FontWeight="Bold" FontSize="10" HorizontalContentAlignment="Center"></TextBox>
+        <TextBox x:Name="NumberWatching" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC31A1A" Margin="699,62,446,585" IsEnabled="False" FontWeight="Bold" FontSize="10" HorizontalContentAlignment="Center"></TextBox>
+        <TextBox x:Name="NumberWatched" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC31A1A" Margin="791,62,354,585" IsEnabled="False" FontWeight="Bold" FontSize="10" HorizontalContentAlignment="Center"></TextBox>
+        <TextBox x:Name="NumberAll" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC31A1A" Margin="887,62,264,585" IsEnabled="False" FontWeight="Bold" FontSize="10" HorizontalContentAlignment="Center"></TextBox>
+        <TextBox x:Name="TextDetails" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="244,457,720,20" IsEnabled="False" TextWrapping="WrapWithOverflow" FontWeight="Bold" FontSize="18"></TextBox>
+        <TextBox x:Name="TextSummary" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Margin="485,456,43,21" IsEnabled="True" TextWrapping="WrapWithOverflow" FontWeight="Bold" FontSize="14"></TextBox>
+        <Image Name="imgDynamic" Margin="49,458,958,16"/>
+        <Image Name="UpToDate" Margin="31,617,1105,7"/>
+        <TextBox x:Name="NumberToWatch_Copy" IsReadOnly="True" Background="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC31A1A" Margin="573,53,610,614" IsEnabled="False" FontWeight="Bold" FontSize="8" HorizontalContentAlignment="Center"/>
+    </Grid>
+</Window>
