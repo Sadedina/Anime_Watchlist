@@ -338,6 +338,10 @@ namespace AnimeWPF
         {
             UpdateMore("Yes");
         }
+        private void ButtonMoreMaybe_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMore("Maybe");
+        }
         private void ButtonMoreNo_Click(object sender, RoutedEventArgs e)
         {
             UpdateMore("No");
@@ -359,6 +363,17 @@ namespace AnimeWPF
         private void ButtonFilterRate_Click(object sender, RoutedEventArgs e)
         {
             _filter = 4;
+            TextEpisode.Text = "";
+            TextDetails.Text = "";
+            TextSummary.Text = "";
+            TextSearch.Text = "";
+            PopulateListBox();
+            Picture("");
+            UpToDatePicture(null);
+        }
+        private void ButtonFilterMore_Click(object sender, RoutedEventArgs e)
+        {
+            _filter = 5;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -400,6 +415,9 @@ namespace AnimeWPF
             Picture("");
             UpToDatePicture(null);
         }
+
         #endregion
+
+        
     }
 }

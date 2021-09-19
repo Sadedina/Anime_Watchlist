@@ -69,6 +69,7 @@ namespace AnimeWPF
             TextRank.Clear();
             TextMore.Clear();
             TextSummary.Clear();
+            TextSearch.Clear();
         }
         private void Picture(string picture)
         {
@@ -80,7 +81,7 @@ namespace AnimeWPF
             if (_animeManager.SelectedAnime != null)
             {
                 TextId.Text = _animeManager.SelectedAnime.AnimeId.ToString();
-                TextPicture.Text = _animeManager.SelectedAnime.Picture;
+                TextPicture.Text = _animeManager.SelectedAnime.Picture.Substring(8);
                 TextAnimeName.Text = _animeManager.SelectedAnime.AnimeName;
                 TextEpisode.Text = _animeManager.SelectedAnime.Episode.ToString();
                 TextReleaseYear.Text = _animeManager.SelectedAnime.ReleaseYear.ToString();

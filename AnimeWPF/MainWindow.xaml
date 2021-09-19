@@ -34,13 +34,13 @@
         <ListBox x:Name="ListBoxAnimeTitles" SelectionChanged="ListBoxProfile_SelectionChanged" Background="Black" BorderThickness="5" BorderBrush="#FFC7C7C7" Foreground="#DDFFFFFF" Opacity="0.8" RenderTransformOrigin="0.5,0.5" Margin="810,163,30,115" FontSize="18"/>
 
         <Label x:Name="LabelId" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="45,120,1084,500" FontSize="15" >ID</Label>
-        <Label x:Name="LabelPicture" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,593,1063,27"  FontSize="15">Picture</Label>
+        <Label x:Name="LabelPicture" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,593,961,27"  FontSize="15">Picture (/Animes/...)</Label>
         <Label x:Name="LabelName" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,193,1066,428"  FontSize="15">Name</Label>
         <Label x:Name="LabelEpisode" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,261,1035,363"  FontSize="15">Episode</Label>
         <Label x:Name="LabelReleaseYear" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,326,1030,296"  FontSize="15">Release Year</Label>
         <Label x:Name="LabelStatus" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="43,393,873,240"  FontSize="15">Status (Completed or Ongoing)</Label>
         <Label x:Name="LabelRank" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="45,461,1070,159"  FontSize="15">Rank</Label>
-        <Label x:Name="LabelMore" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,530,935,90"  FontSize="15">More (Yes or No)</Label>
+        <Label x:Name="LabelMore" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="46,530,935,90"  FontSize="15">More (Yes, No or Maybe)</Label>
         <Label x:Name="LabelSummary" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="320,349,775,270" FontSize="15" >Summary</Label>
         <Label x:Name="LabelSearch" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Arial" Background="{x:Null}" Margin="810,54,277,559" FontSize="15" >Search...</Label>
         <Label x:Name="LabelAnime" Grid.RowSpan="1" FontWeight="Bold" Foreground="Black" FontFamily="Harlow Solid Italic" Background="{x:Null}" Margin="810,130,277,480" FontSize="20" RenderTransformOrigin="0.575,0.47" >Anime</Label>

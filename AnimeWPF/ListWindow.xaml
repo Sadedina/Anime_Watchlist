@@ -14,7 +14,7 @@
     <Grid>
         <Button Content="Add To List" HorizontalAlignment="Left" Margin="40,34,0,0" VerticalAlignment="Top" Height="65" Width="225" BorderBrush="#FF5D5D5D" Foreground="White" Background="Black" FontSize="25" FontFamily="Harlow Solid Italic" FontWeight="Normal" BorderThickness="5" Click="ButtonAnime_Click"/>
 
-        <ListView x:Name="animeTable" Margin="394,94,35,240" Background="Black" BorderBrush="#FFFFF977" Opacity="0.8" Foreground="#FF979797" SelectionChanged="animeTable_SelectionChanged">
+        <ListView x:Name="animeTable" Margin="351,94,35,240" Background="Black" BorderBrush="#FFFFF977" Opacity="0.8" Foreground="#FF979797" SelectionChanged="animeTable_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Date" Width="30">
@@ -71,6 +71,7 @@
         <Button Content="Watched" HorizontalAlignment="Left" Margin="190,186,0,0" VerticalAlignment="Top" Height="31" Width="70" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonWatchedSet_Click" Opacity="0.79"/>
         <Button Content="       RESET" HorizontalAlignment="Left" Margin="827,66,0,0" VerticalAlignment="Top" Height="23" Width="83" Background="#FFF3FF5F" FontFamily="Arial Black" Click="ButtonFilterReset_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
         <Button Content="Rate" HorizontalAlignment="Left" Margin="467,66,0,0" VerticalAlignment="Top" Height="23" Width="71" Background="#FFFF5FF4" FontFamily="Arial Black" Click="ButtonFilterRate_Click" Opacity="0.8" FontSize="10"/>
+        <Button Content="More" HorizontalAlignment="Left" Margin="381,66,0,0" VerticalAlignment="Top" Height="23" Width="71" Background="#FFCC5FFF" FontFamily="Arial Black" Click="ButtonFilterMore_Click" Opacity="0.8" FontSize="10"/>
         <Button Content="   To Watch" HorizontalAlignment="Left" Margin="549,66,0,0" VerticalAlignment="Top" Height="23" Width="82" Background="#FF5FFFFC" FontFamily="Arial Black" Click="ButtonFilterToWatch_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
         <Button Content="   Watching" HorizontalAlignment="Left" Margin="642,66,0,0" VerticalAlignment="Top" Height="23" Width="82" Background="#FF5FFFDA" FontFamily="Arial Black" Click="ButtonFilterWatching_Click" Opacity="0.8" FontSize="10" HorizontalContentAlignment="Left"/>
         <Button Content="   Watched" HorizontalAlignment="Left" Margin="735,66,0,0" VerticalAlignment="Top" Height="24" Width="82" Background="#FF5FFFA6" FontFamily="Arial Black" Click="ButtonFilterWatched_Click" Opacity="0.8" HorizontalContentAlignment="Left" Padding="1,1,-3,1" FontSize="10"/>
@@ -105,8 +106,9 @@
         <Button HorizontalAlignment="Left" Margin="260,320,0,0" VerticalAlignment="Top" Height="27" Width="30" Background="{x:Null}" FontFamily="Arial Black" Click="ButtonMoreDelete_Click" Opacity="0.504" BorderBrush="{x:Null}">
             <Image Source="/Background/X.png" Height="20" Width="21" />
         </Button>
-        <Button Content="Yes" HorizontalAlignment="Left" Margin="150,320,0,0" VerticalAlignment="Top" Height="27" Width="110" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonMoreYes_Click" Opacity="0.8"/>
-        <Button Content="No" HorizontalAlignment="Left" Margin="42,320,0,0" VerticalAlignment="Top" Height="27" Width="108" Background="#FFFF5F5F" FontFamily="Arial Black" Click="ButtonMoreNo_Click" Opacity="0.795"/>
+        <Button Content="Maybe" HorizontalAlignment="Left" Margin="116,320,0,0" VerticalAlignment="Top" Height="27" Width="74" Background="#FFFFD25F" FontFamily="Arial Black" Click="ButtonMoreMaybe_Click" Opacity="0.8"/>
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="190,320,0,0" VerticalAlignment="Top" Height="27" Width="70" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonMoreYes_Click" Opacity="0.8"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="42,320,0,0" VerticalAlignment="Top" Height="27" Width="74" Background="#FFFF5F5F" FontFamily="Arial Black" Click="ButtonMoreNo_Click" Opacity="0.795"/>
         <Button Content="Up To Date" HorizontalAlignment="Left" Margin="43,380,0,0" VerticalAlignment="Top" Height="28" Width="217" Background="#FF80FF5F" FontFamily="Arial Black" Click="ButtonUpToDate_Click" Opacity="0.8"/>
 
         <Image Source="/Background/Number.png" Margin="602,55,535,579" Opacity="0.9" />

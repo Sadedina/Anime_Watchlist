@@ -35,6 +35,10 @@ namespace AnimeBusiness
 
 
         // Anime To list
+        public Anime SelectAnimeByName(string title)
+        {
+            return _service.GetAnimeByTitle(title);
+        }
         public List<Anime> RetrieveAllAnime()
         {
             return _service.Animes();
@@ -42,16 +46,12 @@ namespace AnimeBusiness
         public List<Anime> RetrieveSearchedAnime(string search)
         {
             if (search == null || search == "")
-                return RetrieveAllAnime();
+                return _service.Animes();
             else
             {
                 var text = char.ToUpper(search[0]) + search.Substring(1).ToLower();
                 return _service.SearchedAnimes(text);
             }
-        }
-        public Anime SelectAnimeByName(string title)
-        {
-            return _service.GetAnimeByTitle(title);
         }
         public List<Anime> RetrieveSpecificAnime(int? watched)
         {
@@ -59,11 +59,8 @@ namespace AnimeBusiness
             else if (watched == 2)  return _service.AnimesRatedWatching();
             else if (watched == 3)  return _service.AnimesRatedWatched();
             else if (watched == 4)  return _service.AnimesRated();
+            else if (watched == 5)  return _service.AnimesWithMore();
             else                    return _service.Animes();
-        }
-        public List<Anime> RetrieveAnimeWithMore()
-        {
-            return _service.AnimesWithMore();
         }
 
         // Anime CRUD
@@ -125,10 +122,12 @@ namespace AnimeBusiness
                 else
                     isItCompelete = null;
 
-                if (more.ToLower().Contains("y") || more.ToLower().Contains("e") || more.ToLower().Contains("s"))
+                if (more.ToLower().Contains("s") || more.ToLower().Contains("ye"))
                     isThereMore = "Yes";
                 else if (more.ToLower().Contains("n") || more.ToLower().Contains("o"))
                     isThereMore = "No";
+                else if (more.ToLower().Contains("m") || more.ToLower().Contains("a") || more.ToLower().Contains("b"))
+                    isThereMore = "Maybe";
                 else
                     isThereMore = null;
 

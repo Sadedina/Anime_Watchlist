@@ -1,10 +1,52 @@
 ﻿using System;
+using System.Linq;
 
 namespace AnimeBusiness
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
+        {
+            // Change null into Maybe in More coloumn
+            Change.ChangeNullToMaybe();
+
+            // Print all the animes table in SQL script format
+            //Change.PrintAllAnimes();
+        } 
+    }
+    public class Change
+    {
+        private readonly AnimeData.SammListContext _context;
+        public Change(AnimeData.SammListContext context)
+        {
+            _context = context;
+        }
+        public Change()
+        {
+            _context = new AnimeData.SammListContext();
+        }
+        private System.Collections.Generic.List<AnimeData.Anime> AnimesWithMoreNull()
+        {
+            return _context.Animes.Where(a => a.More == null || a.More == "").ToList();
+        }
+        private void Update()
+        {
+            _context.SaveChanges();
+        }
+        public static void ChangeNullToMaybe()
+        {
+            Console.WriteLine("START");
+            var anime = new Change();
+            var addToAList = anime.AnimesWithMoreNull();
+            foreach (var item in addToAList)
+            {
+                item.More = "Maybe";
+            }
+            anime.Update();
+            Console.WriteLine("FINISH");
+        }
+
+        public static void PrintAllAnimes()
         {
             //INSERT INTO Animes(animeName, episode, releaseYear, [status], [rank], picture, summary, more, rating, watch, episodeWatched, upToDate)
             //INSERT INTO Customers(CustomerName, ContactName, Address, City, PostalCode, Country)
@@ -14,10 +56,10 @@ namespace AnimeBusiness
 
             var anime = new AnimeManager();
             var addToAList = anime.RetrieveAllAnime();
-                foreach (var item in addToAList)
+            foreach (var item in addToAList)
                 Console.WriteLine($"('{item.AnimeName.Replace("'", "''")}', '{item.Episode}',  '{item.ReleaseYear}',  '{item.Status}'," +
                     $"  '{item.Rank}',  '{item.Picture.Replace("'", "''")}',  '{item.Summary.Replace("'", "''")}',  '{item.More}', '{item.Rating}', '{item.Watch}'," +
                     $" '{item.EpisodeWatched}', '{item.UpToDate}'),\n");
-        } 
+        }
     }
 }

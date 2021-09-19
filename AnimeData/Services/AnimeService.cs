@@ -48,7 +48,7 @@ namespace AnimeData.Services
         }
         public List<Anime> AnimesWithMore()
         {
-            return _context.Animes.OrderBy(a => a.More).ToList();
+            return _context.Animes.Where(a => a.More == "Maybe").OrderBy(a => a.AnimeName).ToList();
         }
 
 

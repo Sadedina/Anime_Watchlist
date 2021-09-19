@@ -64,6 +64,8 @@
     <None Remove="Animes\Is it wrong to try to pick up girls in a dungeon.png" />
     <None Remove="Animes\I’m standing on a million lives season 2.png" />
     <None Remove="Animes\Jujutsu kaisen.png" />
+    <None Remove="Animes\Magi - the kingdom of magic 2.png" />
+    <None Remove="Animes\Magi - the labyrinth of magic.png" />
     <None Remove="Animes\March comes in like a lion 2.png" />
     <None Remove="Animes\March comes in like a lion.png" />
     <None Remove="Animes\Miss kobayashi%27s - mini dragon 3.png" />
@@ -78,6 +80,7 @@
     <None Remove="Animes\One piece.png" />
     <None Remove="Animes\Peach boy riverside.png" />
     <None Remove="Animes\Princess lover!.png" />
+    <None Remove="Animes\Prison school.png" />
     <None Remove="Animes\Quanzhi fashi 2.png" />
     <None Remove="Animes\Quanzhi fashi 3.png" />
     <None Remove="Animes\Quanzhi fashi 4.png" />
@@ -95,8 +98,12 @@
     <None Remove="Animes\That time i got reincarnated as a slime.png" />
     <None Remove="Animes\The 8th son. are you kidding me.png" />
     <None Remove="Animes\The dungeon of black company.png" />
+    <None Remove="Animes\The god of high school.png" />
     <None Remove="Animes\The hidden dungeon only i can enter.png" />
+    <None Remove="Animes\The honor at magic high school.png" />
     <None Remove="Animes\The idaten deities know only peace.png" />
+    <None Remove="Animes\The irregular at magic high school - visitor arc 2.png" />
+    <None Remove="Animes\The irregular at magic high school.png" />
     <None Remove="Animes\The silver guardian 2.png" />
     <None Remove="Animes\The silver guardian.png" />
     <None Remove="Animes\The slime diaries - that time i got reincarnated as a slime.png" />
@@ -219,6 +226,8 @@
     <Resource Include="Animes\Is it wrong to try to pick up girls in a dungeon.png" />
     <Resource Include="Animes\I’m standing on a million lives season 2.png" />
     <Resource Include="Animes\Jujutsu kaisen.png" />
+    <Resource Include="Animes\Magi - the kingdom of magic 2.png" />
+    <Resource Include="Animes\Magi - the labyrinth of magic.png" />
     <Resource Include="Animes\March comes in like a lion 2.png" />
     <Resource Include="Animes\March comes in like a lion.png" />
     <Resource Include="Animes\Miss kobayashi's - mini dragon 3.png" />
@@ -232,6 +241,7 @@
     <Resource Include="Animes\One piece.png" />
     <Resource Include="Animes\Peach boy riverside.png" />
     <Resource Include="Animes\Princess lover!.png" />
+    <Resource Include="Animes\Prison school.png" />
     <Resource Include="Animes\Quanzhi fashi 2.png" />
     <Resource Include="Animes\Quanzhi fashi 3.png" />
     <Resource Include="Animes\Quanzhi fashi 4.png" />
@@ -249,8 +259,12 @@
     <Resource Include="Animes\That time i got reincarnated as a slime.png" />
     <Resource Include="Animes\The 8th son. are you kidding me.png" />
     <Resource Include="Animes\The dungeon of black company.png" />
+    <Resource Include="Animes\The god of high school.png" />
     <Resource Include="Animes\The hidden dungeon only i can enter.png" />
+    <Resource Include="Animes\The honor at magic high school.png" />
     <Resource Include="Animes\The idaten deities know only peace.png" />
+    <Resource Include="Animes\The irregular at magic high school - visitor arc 2.png" />
+    <Resource Include="Animes\The irregular at magic high school.png" />
     <Resource Include="Animes\The silver guardian 2.png" />
     <Resource Include="Animes\The silver guardian.png" />
     <Resource Include="Animes\The slime diaries - that time i got reincarnated as a slime.png" />
