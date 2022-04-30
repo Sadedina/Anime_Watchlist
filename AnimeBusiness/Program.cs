@@ -16,32 +16,30 @@ namespace AnimeBusiness
     }
     public class Change
     {
-        private readonly AnimeData.SammListContext _context;
+        private readonly AnimeData.SammListContext context;
         public Change(AnimeData.SammListContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public Change()
         {
-            _context = new AnimeData.SammListContext();
+            this.context = new AnimeData.SammListContext();
         }
-        private System.Collections.Generic.List<AnimeData.Anime> AnimesWithMoreNull()
-        {
-            return _context.Animes.Where(a => a.More == null || a.More == "").ToList();
-        }
-        private void Update()
-        {
-            _context.SaveChanges();
-        }
+        private System.Collections.Generic.List<AnimeData.Anime> AnimesWithMoreNull() =>
+            context.Animes.Where(a => a.More == null || a.More == "").ToList();
+
+        private void Update() =>
+            context.SaveChanges();
+
         public static void ChangeNullToMaybe()
         {
             Console.WriteLine("START");
             var anime = new Change();
             var addToAList = anime.AnimesWithMoreNull();
+            
             foreach (var item in addToAList)
-            {
                 item.More = "Maybe";
-            }
+
             anime.Update();
             Console.WriteLine("FINISH");
         }

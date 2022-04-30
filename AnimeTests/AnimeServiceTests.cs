@@ -1,26 +1,26 @@
-using NUnit.Framework;
+using System;
+using System.Linq;
 using AnimeData;
 using AnimeData.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System;
+using NUnit.Framework;
 
 namespace AnimeTests
 {
     public class AnimeManagerShould
     {
-        private AnimeService _sut;
-        private SammListContext _context;
+        private AnimeService service;
+        private SammListContext context;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             var options = new DbContextOptionsBuilder<SammListContext>().UseInMemoryDatabase(databaseName: "Example_DB").Options;
-            _context = new SammListContext(options);
-            _sut = new AnimeService(_context);
+            context = new SammListContext(options);
+            service = new AnimeService(context);
 
             // Seed the database
-            _sut.Create(new Anime
+            service.Create(new Anime
             {
                 AnimeId = 1,
                 AnimeName = "Tokyo Revengers",
@@ -36,7 +36,7 @@ namespace AnimeTests
                 EpisodeWatched = 3,
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             });
-            _sut.Create(new Anime
+            service.Create(new Anime
             {
                 AnimeId = 2,
                 AnimeName = "One Piece",
@@ -57,7 +57,7 @@ namespace AnimeTests
         [Test]
         public void GivenAValidId_CorrectAnimeListIsReturned()
         {
-            var result = _sut.GetAnimeByTitle("Tokyo Revengers");
+            var result = service.GetAnimeByTitle("Tokyo Revengers");
             Assert.That(result, Is.TypeOf<Anime>());
             Assert.That(result.AnimeId, Is.EqualTo(1));
             Assert.That(result.Episode, Is.EqualTo(24));
@@ -77,7 +77,7 @@ namespace AnimeTests
         public void GivenANewAnime_CreateAddItToTheDatabase()
         {
             // Arrange
-            var numberOfAnimeBefore = _context.Animes.Count();
+            var numberOfAnimeBefore = context.Animes.Count();
             var newAnime = new Anime
             {
                 AnimeId = 3,
@@ -96,8 +96,8 @@ namespace AnimeTests
             };
 
             // Act
-            _sut.Create(newAnime);
-            var result = _sut.GetAnimeByTitle("Mob Psycho 100");
+            service.Create(newAnime);
+            var result = service.GetAnimeByTitle("Mob Psycho 100");
 
             // Assert
             Assert.That(result, Is.TypeOf<Anime>());
@@ -114,30 +114,30 @@ namespace AnimeTests
             Assert.That(result.EpisodeWatched, Is.EqualTo(24));
             Assert.That(result.UpToDate, Is.EqualTo(new DateTime(2018, 03, 10, 8, 30, 52)));
 
-            Assert.That(_context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore + 1));
+            Assert.That(context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore + 1));
 
             // Clean Up
-            _sut.Delete(result);
-            Assert.That(_context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore));
+            service.Delete(result);
+            Assert.That(context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore));
         }
 
         [Test]
         public void GivenANewAnime_DeleteRemovesAnimeFromTheDatabase()
         {
             // Arrange
-            var numberOfAnimeBefore = _context.Animes.Count();
-            var animeToDelete = _sut.GetAnimeByTitle("Tokyo Revengers");
+            var numberOfAnimeBefore = context.Animes.Count();
+            var animeToDelete = service.GetAnimeByTitle("Tokyo Revengers");
 
             // Act
-            _sut.Delete(animeToDelete);
-            var result = _sut.GetAnimeByTitle("Tokyo Revengers");
+            service.Delete(animeToDelete);
+            var result = service.GetAnimeByTitle("Tokyo Revengers");
 
             // Assert
             Assert.That(result, Is.Null);
-            Assert.That(_context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore - 1));
+            Assert.That(context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore - 1));
 
             // Clean Up
-            _sut.Create(new Anime
+            service.Create(new Anime
             {
                 AnimeId = 1,
                 AnimeName = "Tokyo Revengers",
@@ -153,9 +153,7 @@ namespace AnimeTests
                 EpisodeWatched = 3,
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             });
-            Assert.That(_context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore));
+            Assert.That(context.Animes.Count(), Is.EqualTo(numberOfAnimeBefore));
         }
-
-
     }
 }

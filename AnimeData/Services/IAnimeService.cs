@@ -6,7 +6,6 @@ namespace AnimeData.Services
     {
         public Anime GetAnimeByTitle(string animeName);
 
-
         public List<Anime> Animes();
         public List<Anime> SearchedAnimes(string search);
         public List<Anime> AnimesRatedToWatch();
@@ -17,7 +16,6 @@ namespace AnimeData.Services
 
         public void Create(Anime context);
         public void Update();
-        public void Delete(Anime context);
-        
+        public void Delete(Anime context);       
     }
 }

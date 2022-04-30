@@ -5,67 +5,56 @@ namespace AnimeData.Services
 {
     public class AnimeService : IAnimeService
     {
-        private readonly SammListContext _context;
+        private readonly SammListContext context;
 
         public AnimeService(SammListContext context)
         {
-            _context = context;
+            this.context = context;
         }
         public AnimeService()
         {
-            _context = new SammListContext();
+            this.context = new SammListContext();
         }
 
-        public Anime GetAnimeByTitle(string animeName)
-        {
-            return _context.Animes.Where(a => a.AnimeName == animeName).FirstOrDefault();
-        }
+        public Anime GetAnimeByTitle(string animeName) =>
+            context.Animes.Where(a => a.AnimeName == animeName).FirstOrDefault();
 
 
-        public List<Anime> Animes()
-        {
-            return _context.Animes.OrderBy(a => a.AnimeName).ToList();
-        }
-        public List<Anime> SearchedAnimes(string search)
-        {
-            return _context.Animes.Where(a => a.AnimeName.Contains(search)).OrderBy(a => a.AnimeName).ToList();
-        }
-        public List<Anime> AnimesRatedToWatch()
-        {
-            return _context.Animes.Where(a => a.Watch == "To Watch").OrderBy(a => a.AnimeName).ToList();
-        }
-        public List<Anime> AnimesRatedWatching()
-        {
-            return _context.Animes.Where(a => a.Watch == "Watching").OrderBy(a => a.AnimeName).ToList();
-        }
-        public List<Anime> AnimesRatedWatched()
-        {
-            return _context.Animes.Where(a => a.Watch == "Watched").OrderBy(a => a.AnimeName).ToList();
-        }
-        public List<Anime> AnimesRated()
-        {
-            return _context.Animes.OrderByDescending(a => a.Rating).ToList();
-        }
-        public List<Anime> AnimesWithMore()
-        {
-            return _context.Animes.Where(a => a.More == "Maybe").OrderBy(a => a.AnimeName).ToList();
-        }
+        public List<Anime> Animes() =>
+            context.Animes.OrderBy(a => a.AnimeName).ToList();
 
+        public List<Anime> SearchedAnimes(string search) =>
+            context.Animes.Where(a => a.AnimeName.Contains(search)).OrderBy(a => a.AnimeName).ToList();
+
+        public List<Anime> AnimesRatedToWatch() =>
+            context.Animes.Where(a => a.Watch == "To Watch").OrderBy(a => a.AnimeName).ToList();
+
+        public List<Anime> AnimesRatedWatching() =>
+            context.Animes.Where(a => a.Watch == "Watching").OrderBy(a => a.AnimeName).ToList();
+
+        public List<Anime> AnimesRatedWatched() =>
+            context.Animes.Where(a => a.Watch == "Watched").OrderBy(a => a.AnimeName).ToList();
+
+        public List<Anime> AnimesRated() =>
+            context.Animes.OrderByDescending(a => a.Rating).ToList();
+
+        public List<Anime> AnimesWithMore() =>
+            context.Animes.Where(a => a.More == "Maybe").OrderBy(a => a.AnimeName).ToList();
 
 
         public void Create(Anime anime)
         {
-            _context.Animes.Add(anime);
-            _context.SaveChanges();
+            context.Animes.Add(anime);
+            context.SaveChanges();
         }
         public void Update()
         {
-            _context.SaveChanges();
+            context.SaveChanges();
         }
         public void Delete(Anime anime)
         {
-            _context.Animes.Remove(anime);
-            _context.SaveChanges();
+            context.Animes.Remove(anime);
+            context.SaveChanges();
         }
     }
 }

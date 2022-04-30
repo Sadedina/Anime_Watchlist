@@ -10,7 +10,7 @@ namespace AnimeTests
 {
     public class AnimeServiceTests
     {
-        private AnimeManager _sut;
+        private AnimeManager service;
 
         [Test]
         public void ThrowException_WhenAnimeServiceIsNull()
@@ -25,9 +25,9 @@ namespace AnimeTests
         {
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
-            Assert.That(_sut, Is.InstanceOf<AnimeManager>());
+            Assert.That(service, Is.InstanceOf<AnimeManager>());
         }
 
         //===========================================       Select Anime By Name      ===========================================
@@ -53,10 +53,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(cs => cs.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.SelectAnimeByName("Tokyo Revengers");
+            var result = service.SelectAnimeByName("Tokyo Revengers");
 
             // Assert
             Assert.That(result, Is.InstanceOf<Anime>());
@@ -80,7 +80,7 @@ namespace AnimeTests
         {
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
-            var result = _sut.RetrieveSpecificAnime(4).Count;
+            var result = service.RetrieveSpecificAnime(4).Count;
             var animeOne = new Anime()
             {
                 AnimeId = 1,
@@ -98,10 +98,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(cs => cs.GetAnimeByTitle("Tokyo Revengers")).Returns(animeOne);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var expected = _sut.RetrieveSpecificAnime(4).Count;
+            var expected = service.RetrieveSpecificAnime(4).Count;
 
             // Assert
             Assert.That(result, Is.EqualTo(expected - 1));
@@ -124,10 +124,10 @@ namespace AnimeTests
         {
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateAnime(animeTitle: "Tokyo Revengers", episode: 24, releaseYear: 2021,
+            var result = service.CreateAnime(animeTitle: "Tokyo Revengers", episode: 24, releaseYear: 2021,
             status: "Ongoing", rank: null, summary: "The story is amazing", more: "No");
 
             // Assert
@@ -156,10 +156,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateAnime(animeTitle: "Tokyo Revengers", episode: 24, releaseYear: 2021,
+            var result = service.CreateAnime(animeTitle: "Tokyo Revengers", episode: 24, releaseYear: 2021,
             status: "Ongoing", rank: null, summary: "The story is amazing", more: "No");
 
             // Assert
@@ -174,10 +174,10 @@ namespace AnimeTests
             var mockAnimeService = new Mock<IAnimeService>();
             // No SetUp required
             //mockAnimeService.Setup(a => a.GetAnimeByTitle(It.IsAny<string>())).Returns(new Anime());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateAnime(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(),
+            var result = service.CreateAnime(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(),
                 It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(),
                 It.IsAny<string>());
 
@@ -193,10 +193,10 @@ namespace AnimeTests
             var mockAnimeService = new Mock<IAnimeService>();
             mockAnimeService.Setup(cs => cs.GetAnimeByTitle("Tokyo Ghoul")).Returns(new Anime());
             mockAnimeService.Setup(cs => cs.Create((Anime)null)).Throws<DbUpdateConcurrencyException>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateAnime(animeTitle: "Tokyo Ghoul", episode: It.IsAny<int>(),
+            var result = service.CreateAnime(animeTitle: "Tokyo Ghoul", episode: It.IsAny<int>(),
                 releaseYear: It.IsAny<int>(), status: It.IsAny<string>(), rank: null,
                 summary: It.IsAny<string>(), more: It.IsAny<string>());
 
@@ -228,10 +228,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
+            var result = service.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
             status: "Completed", rank: null, summary: "The story is sucks", more: "Yes");
 
             // Assert
@@ -261,25 +261,25 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
+            var result = service.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
             status: "Completed", rank: null, summary: "The story is sucks", more: "Yes");
 
             // Assert
             Assert.That(result, Is.InstanceOf<Boolean>());
-            Assert.That(_sut.SelectedAnime.AnimeName, Is.EqualTo("TK"));
-            Assert.That(_sut.SelectedAnime.Episode, Is.EqualTo(1));
-            Assert.That(_sut.SelectedAnime.ReleaseYear, Is.EqualTo(2000));
-            Assert.That(_sut.SelectedAnime.Status, Is.EqualTo("Completed"));
-            Assert.That(_sut.SelectedAnime.Rank, Is.Null);
-            Assert.That(_sut.SelectedAnime.Summary, Is.EqualTo("The story is sucks"));
-            Assert.That(_sut.SelectedAnime.More, Is.EqualTo("Yes"));
-            Assert.That(_sut.SelectedAnime.EpisodeWatched, Is.EqualTo(3));
-            Assert.That(_sut.SelectedAnime.Rating, Is.EqualTo(5));
-            Assert.That(_sut.SelectedAnime.Watch, Is.EqualTo("Watching"));
-            Assert.That(_sut.SelectedAnime.UpToDate, Is.EqualTo(new DateTime(2021, 03, 10, 8, 30, 52)));
+            Assert.That(service.SelectedAnime.AnimeName, Is.EqualTo("TK"));
+            Assert.That(service.SelectedAnime.Episode, Is.EqualTo(1));
+            Assert.That(service.SelectedAnime.ReleaseYear, Is.EqualTo(2000));
+            Assert.That(service.SelectedAnime.Status, Is.EqualTo("Completed"));
+            Assert.That(service.SelectedAnime.Rank, Is.Null);
+            Assert.That(service.SelectedAnime.Summary, Is.EqualTo("The story is sucks"));
+            Assert.That(service.SelectedAnime.More, Is.EqualTo("Yes"));
+            Assert.That(service.SelectedAnime.EpisodeWatched, Is.EqualTo(3));
+            Assert.That(service.SelectedAnime.Rating, Is.EqualTo(5));
+            Assert.That(service.SelectedAnime.Watch, Is.EqualTo("Watching"));
+            Assert.That(service.SelectedAnime.UpToDate, Is.EqualTo(new DateTime(2021, 03, 10, 8, 30, 52)));
         }
 
         [Test]
@@ -288,10 +288,10 @@ namespace AnimeTests
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns((Anime)null);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "My Hero Academia", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(), releaseYear: It.IsAny<int>(),
+            var result = service.UpdateAnime(oldAnimeTitle: "My Hero Academia", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(), releaseYear: It.IsAny<int>(),
             status: It.IsAny<string>(), rank: null, summary: It.IsAny<string>(), more: It.IsAny<string>());
 
             // Assert
@@ -305,10 +305,10 @@ namespace AnimeTests
             var mockCustomerService = new Mock<IAnimeService>();
             mockCustomerService.Setup(cs => cs.GetAnimeByTitle("Tokyo Ghoul")).Returns(new Anime());
             mockCustomerService.Setup(cs => cs.Update()).Throws<DbUpdateConcurrencyException>();
-            _sut = new AnimeManager(mockCustomerService.Object);
+            service = new AnimeManager(mockCustomerService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "My Hero Academia", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(), 
+            var result = service.UpdateAnime(oldAnimeTitle: "My Hero Academia", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(), 
                 releaseYear: It.IsAny<int>(), status: It.IsAny<string>(), rank: null, 
                 summary: It.IsAny<string>(), more: It.IsAny<string>());
 
@@ -324,10 +324,10 @@ namespace AnimeTests
             var mockCustomerService = new Mock<IAnimeService>();
             mockCustomerService.Setup(cs => cs.GetAnimeByTitle("Tokyo Ghoul")).Returns(new Anime());
 
-            _sut = new AnimeManager(mockCustomerService.Object);
+            service = new AnimeManager(mockCustomerService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "Tokyo Ghoul", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(),
+            var result = service.UpdateAnime(oldAnimeTitle: "Tokyo Ghoul", newAnimeTitle: It.IsAny<string>(), episode: It.IsAny<int>(),
                 releaseYear: It.IsAny<int>(), status: It.IsAny<string>(), rank: null,
                 summary: It.IsAny<string>(), more: It.IsAny<string>());
 
@@ -358,10 +358,10 @@ namespace AnimeTests
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
             //mockAnimeService.Setup(a => a.Update());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
+            var result = service.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
             status: "Completed", rank: null, summary: "The story is sucks", more: "Yes");
 
             // Assert
@@ -391,10 +391,10 @@ namespace AnimeTests
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
             mockAnimeService.Setup(a => a.Update());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
+            var result = service.UpdateAnime(oldAnimeTitle: "Tokyo Revengers", newAnimeTitle: "TK", episode: 1, releaseYear: 2000,
             status: "Completed", rank: null, summary: "The story is sucks", more: "Yes");
 
             // Assert
@@ -425,10 +425,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 5, more: "Yes", watch: "Watching",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 5, more: "Yes", watch: "Watching",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -457,26 +457,26 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
             Assert.That(result, Is.InstanceOf<Boolean>());
-            Assert.That(_sut.SelectedAnime.AnimeName, Is.EqualTo("Tokyo Revengers"));
-            Assert.That(_sut.SelectedAnime.Episode, Is.EqualTo(24));
-            Assert.That(_sut.SelectedAnime.ReleaseYear, Is.EqualTo(2021));
-            Assert.That(_sut.SelectedAnime.Status, Is.EqualTo("Ongoing"));
-            Assert.That(_sut.SelectedAnime.Rank, Is.Null);
-            Assert.That(_sut.SelectedAnime.Picture, Is.EqualTo("Tk.jpg"));
-            Assert.That(_sut.SelectedAnime.Summary, Is.EqualTo("The story is amazing"));
-            Assert.That(_sut.SelectedAnime.More, Is.EqualTo("Yes"));
-            Assert.That(_sut.SelectedAnime.EpisodeWatched, Is.EqualTo(5));
-            Assert.That(_sut.SelectedAnime.Rating, Is.EqualTo(2));
-            Assert.That(_sut.SelectedAnime.Watch, Is.EqualTo("Watched"));
-            Assert.That(_sut.SelectedAnime.UpToDate, Is.EqualTo(new DateTime(2020, 03, 10, 8, 30, 52)));
+            Assert.That(service.SelectedAnime.AnimeName, Is.EqualTo("Tokyo Revengers"));
+            Assert.That(service.SelectedAnime.Episode, Is.EqualTo(24));
+            Assert.That(service.SelectedAnime.ReleaseYear, Is.EqualTo(2021));
+            Assert.That(service.SelectedAnime.Status, Is.EqualTo("Ongoing"));
+            Assert.That(service.SelectedAnime.Rank, Is.Null);
+            Assert.That(service.SelectedAnime.Picture, Is.EqualTo("Tk.jpg"));
+            Assert.That(service.SelectedAnime.Summary, Is.EqualTo("The story is amazing"));
+            Assert.That(service.SelectedAnime.More, Is.EqualTo("Yes"));
+            Assert.That(service.SelectedAnime.EpisodeWatched, Is.EqualTo(5));
+            Assert.That(service.SelectedAnime.Rating, Is.EqualTo(2));
+            Assert.That(service.SelectedAnime.Watch, Is.EqualTo("Watched"));
+            Assert.That(service.SelectedAnime.UpToDate, Is.EqualTo(new DateTime(2020, 03, 10, 8, 30, 52)));
         }
 
         [Test]
@@ -485,10 +485,10 @@ namespace AnimeTests
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns((Anime)null);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -502,10 +502,10 @@ namespace AnimeTests
             var mockCustomerService = new Mock<IAnimeService>();
             mockCustomerService.Setup(cs => cs.GetAnimeByTitle("Tokyo Ghoul")).Returns(new Anime());
             mockCustomerService.Setup(cs => cs.Update()).Throws<DbUpdateConcurrencyException>();
-            _sut = new AnimeManager(mockCustomerService.Object);
+            service = new AnimeManager(mockCustomerService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -519,10 +519,10 @@ namespace AnimeTests
             var mockCustomerService = new Mock<IAnimeService>();
             mockCustomerService.Setup(cs => cs.GetAnimeByTitle("Tokyo Ghoul")).Returns(new Anime());
 
-            _sut = new AnimeManager(mockCustomerService.Object);
+            service = new AnimeManager(mockCustomerService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Ghoul", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Ghoul", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -552,10 +552,10 @@ namespace AnimeTests
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
             //mockAnimeService.Setup(a => a.Update());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -585,10 +585,10 @@ namespace AnimeTests
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
             mockAnimeService.Setup(a => a.Update());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -602,10 +602,10 @@ namespace AnimeTests
         {
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateOrUpdateAnime(animeTitle: "Tokyo Revengers", newAnimeTitle: "Tokyo Revengers", 
+            var result = service.CreateOrUpdateAnime(animeTitle: "Tokyo Revengers", newAnimeTitle: "Tokyo Revengers", 
                 episode: 24, releaseYear: 2021, status: "Ongoing", rank: null, 
                 summary: "The story is amazing", more: "No");
 
@@ -635,10 +635,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateOrUpdateAnime(animeTitle: "Tokyo Revengers", newAnimeTitle: "Tokyo Revengers",
+            var result = service.CreateOrUpdateAnime(animeTitle: "Tokyo Revengers", newAnimeTitle: "Tokyo Revengers",
                 episode: 24, releaseYear: 2021, status: "Ongoing", rank: null,
                 summary: "The story is amazing", more: "No");
 
@@ -654,10 +654,10 @@ namespace AnimeTests
             var mockAnimeService = new Mock<IAnimeService>();
             // No SetUp required
             //mockAnimeService.Setup(a => a.GetAnimeByTitle(It.IsAny<string>())).Returns(new Anime());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateOrUpdateAnime(animeTitle: It.IsAny<string>(), newAnimeTitle: It.IsAny<string>(),
+            var result = service.CreateOrUpdateAnime(animeTitle: It.IsAny<string>(), newAnimeTitle: It.IsAny<string>(),
                 episode: It.IsAny<int>(), releaseYear: It.IsAny<int>(), status: It.IsAny<string>(),
                 rank: null, summary: It.IsAny<string>(), more: It.IsAny<string>());
 
@@ -673,10 +673,10 @@ namespace AnimeTests
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
             mockAnimeService.Setup(a => a.GetAnimeByTitle(It.IsAny<string>())).Returns(new Anime());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.CreateOrUpdateAnime(animeTitle: It.IsAny<string>(), newAnimeTitle: It.IsAny<string>(),
+            var result = service.CreateOrUpdateAnime(animeTitle: It.IsAny<string>(), newAnimeTitle: It.IsAny<string>(),
                 episode: It.IsAny<int>(), releaseYear: It.IsAny<int>(), status: It.IsAny<string>(), 
                 rank: null, summary: It.IsAny<string>(), more: It.IsAny<string>());
 
@@ -709,10 +709,10 @@ namespace AnimeTests
                 UpToDate = new DateTime(2021, 03, 10, 8, 30, 52)
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.DeleteAnime("Tokyo Revengers");
+            var result = service.DeleteAnime("Tokyo Revengers");
 
             // Assert
             Assert.That(result);
@@ -723,10 +723,10 @@ namespace AnimeTests
         {
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
+            var result = service.UpdateWatchlist(animeTitle: "Tokyo Revengers", rating: 2, more: "Yes", watch: "Watched",
             episodeWatched: 5, upToDate: new DateTime(2020, 03, 10, 8, 30, 52));
 
             // Assert
@@ -739,10 +739,10 @@ namespace AnimeTests
             // Arrange
             var mockAnimeService = new Mock<IAnimeService>();
             mockAnimeService.Setup(a => a.GetAnimeByTitle(It.IsAny<string>())).Returns(new Anime());
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.DeleteAnime(It.IsAny<string>());
+            var result = service.DeleteAnime(It.IsAny<string>());
 
             // Assert
             mockAnimeService.Verify(a => a.Delete(It.IsAny<Anime>()), Times.Once);
@@ -772,10 +772,10 @@ namespace AnimeTests
             };
             mockAnimeService.Setup(a => a.GetAnimeByTitle("Tokyo Revengers")).Returns(originaleAnime);
             mockAnimeService.Setup(cs => cs.Delete((Anime)null)).Throws<DbUpdateConcurrencyException>();
-            _sut = new AnimeManager(mockAnimeService.Object);
+            service = new AnimeManager(mockAnimeService.Object);
 
             // Act
-            var result = _sut.DeleteAnime(animeTitle: "Tokyo Ghoul");
+            var result = service.DeleteAnime(animeTitle: "Tokyo Ghoul");
 
             // Assert
             Assert.That(result, Is.False);
