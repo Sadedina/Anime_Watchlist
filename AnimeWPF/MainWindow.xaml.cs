@@ -13,14 +13,14 @@ namespace AnimeWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AnimeManager _animeManager = new AnimeManager();
-        private string _oldAnimeName = "";
-        private List<Anime> _allAnime;
+        private AnimeManager animeManager = new AnimeManager();
+        private string oldAnimeName = "";
+        private List<Anime> allAnime;
         public MainWindow()
         {
             InitializeComponent();
             PopulateListBox();
-            _allAnime = _animeManager.RetrieveAllAnime();
+            allAnime = animeManager.RetrieveAllAnime();
         }
         private void ButtonWatchlist_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +36,7 @@ namespace AnimeWPF
 
             //ListBoxAnimeTitles.ItemsSource = _animeManager.RetrieveAllAnime();
 
-            var list = _animeManager.RetrieveAllAnime();
+            var list = animeManager.RetrieveAllAnime();
             foreach (var item in list)
                 ListBoxAnimeTitles.Items.Add(item.AnimeName);
         }
@@ -48,7 +48,7 @@ namespace AnimeWPF
                 //EmptyFields();
                 //Picture("");
 
-                var list = _animeManager.RetrieveSearchedAnime(search);
+                var list = animeManager.RetrieveSearchedAnime(search);
                 foreach (var item in list)
                     ListBoxAnimeTitles.Items.Add(item.AnimeName);
                 //foreach (var item in _allAnime)
@@ -78,20 +78,20 @@ namespace AnimeWPF
         }
         private void PopulateFields()
         {
-            if (_animeManager.SelectedAnime != null)
+            if (animeManager.SelectedAnime != null)
             {
-                TextId.Text = _animeManager.SelectedAnime.AnimeId.ToString();
-                TextPicture.Text = _animeManager.SelectedAnime.Picture.Substring(8);
-                TextAnimeName.Text = _animeManager.SelectedAnime.AnimeName;
-                TextEpisode.Text = _animeManager.SelectedAnime.Episode.ToString();
-                TextReleaseYear.Text = _animeManager.SelectedAnime.ReleaseYear.ToString();
-                TextStatus.Text = _animeManager.SelectedAnime.Status;
-                TextRank.Text = _animeManager.SelectedAnime.Rank.ToString();
-                TextMore.Text = _animeManager.SelectedAnime.More;
-                TextSummary.Text = _animeManager.SelectedAnime.Summary;
+                TextId.Text = animeManager.SelectedAnime.AnimeId.ToString();
+                TextPicture.Text = animeManager.SelectedAnime.Picture.Substring(8);
+                TextAnimeName.Text = animeManager.SelectedAnime.AnimeName;
+                TextEpisode.Text = animeManager.SelectedAnime.Episode.ToString();
+                TextReleaseYear.Text = animeManager.SelectedAnime.ReleaseYear.ToString();
+                TextStatus.Text = animeManager.SelectedAnime.Status;
+                TextRank.Text = animeManager.SelectedAnime.Rank.ToString();
+                TextMore.Text = animeManager.SelectedAnime.More;
+                TextSummary.Text = animeManager.SelectedAnime.Summary;
 
-                Picture(_animeManager.SelectedAnime.Picture);
-                _oldAnimeName = TextAnimeName.Text;
+                Picture(animeManager.SelectedAnime.Picture);
+                oldAnimeName = TextAnimeName.Text;
             }
         }
 
@@ -99,7 +99,7 @@ namespace AnimeWPF
         {
             if (ListBoxAnimeTitles.SelectedItem != null)
             {
-                _animeManager.SetSelectedAnimeByTitle(ListBoxAnimeTitles.SelectedItem.ToString());
+                animeManager.SetSelectedAnimeByTitle(ListBoxAnimeTitles.SelectedItem.ToString());
                 //Trace.WriteLineIf(ListBoxAnimeTitles.SelectedItem.ToString().Contains("BLOG"), $"BLOG was selected");
                 PopulateFields();
             }
@@ -122,7 +122,7 @@ namespace AnimeWPF
                 /*CreateOrUpdateAnime(string animeTitle, string newAnimeTitle, int? episode, int? releaseYear,
                 * string status, int? rank, string summary, string more
                 */
-                _animeManager.CreateAnime(
+                animeManager.CreateAnime(
                   animeTitle: TextAnimeName.Text,
                   episode: converted_episode,
                   releaseYear: converted_releaseYear,
@@ -133,9 +133,9 @@ namespace AnimeWPF
             }
 
             // Refresh Data
-            _allAnime = _animeManager.RetrieveAllAnime();
+            allAnime = animeManager.RetrieveAllAnime();
             PopulateListBox();
-            _animeManager.SetSelectedAnimeByTitle(TextAnimeName.Text);
+            animeManager.SetSelectedAnimeByTitle(TextAnimeName.Text);
             EmptyFields();
             PopulateFields();
         }
@@ -152,8 +152,8 @@ namespace AnimeWPF
                 /*CreateOrUpdateAnime(string animeTitle, string newAnimeTitle, int? episode, int? releaseYear,
                 * string status, int? rank, string summary, string more
                 */
-                _animeManager.UpdateAnime(
-                  oldAnimeTitle: _oldAnimeName,
+                animeManager.UpdateAnime(
+                  oldAnimeTitle: oldAnimeName,
                   newAnimeTitle: TextAnimeName.Text,
                   episode: converted_episode,
                   releaseYear: converted_releaseYear,
@@ -164,7 +164,7 @@ namespace AnimeWPF
             }
 
             // Refresh Data
-            _allAnime = _animeManager.RetrieveAllAnime();
+            allAnime = animeManager.RetrieveAllAnime();
             PopulateListBox();
             EmptyFields();
             PopulateFields();
@@ -179,10 +179,10 @@ namespace AnimeWPF
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        _animeManager.DeleteAnime(anime);
+                        animeManager.DeleteAnime(anime);
 
                         // Refresh Data
-                        _allAnime = _animeManager.RetrieveAllAnime();
+                        allAnime = animeManager.RetrieveAllAnime();
                         PopulateListBox();
                         EmptyFields();
                         Picture("");
@@ -197,7 +197,7 @@ namespace AnimeWPF
         private void ButtonReset_Click(object sender, RoutedEventArgs e)
         {
             TextSearch.Clear();
-            _allAnime = _animeManager.RetrieveAllAnime();
+            allAnime = animeManager.RetrieveAllAnime();
             ListBoxAnimeTitles.SelectedItem = null;
             PopulateListBox();
             EmptyFields();

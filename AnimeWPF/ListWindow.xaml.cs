@@ -1,9 +1,9 @@
-﻿using AnimeBusiness;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using AnimeBusiness;
 
 namespace AnimeWPF
 {
@@ -12,8 +12,8 @@ namespace AnimeWPF
     /// </summary>
     public partial class ListWindow : Window
     {
-        private AnimeManager _animeManager = new AnimeManager();
-        private int? _filter = null;
+        private AnimeManager animeManager = new AnimeManager();
+        private int? filter = null;
         public ListWindow()
         {
             InitializeComponent();
@@ -29,17 +29,20 @@ namespace AnimeWPF
         
         private string Date(DateTime? lastWatched)
         {
-            if (lastWatched == null) return "";
+            if (lastWatched == null)
+                return "";
             
             var difference = DateTime.Now - lastWatched;
             //TimeSpan
             //TimeSpan(int hours, int minutes, int seconds)
-            //TimeSpan(int days, int hours, int minutes, int seconds)
+            //TimeSpan(int days, int hours, int minutes, isnt seconds)
             //TimeSpan(int days, int hours, int minutes, int seconds, int milliseconds)
             TimeSpan duration = new TimeSpan(7, 0, 0, 0);
 
-            if (difference <= duration) return "/Background/UpDate.png";
-            else return "/Background/DownDate.png";
+            if (difference <= duration)
+                return "/Background/UpDate.png";
+            else
+                return "/Background/DownDate.png";
         }
         private string Rate(int? rate)
         {
@@ -81,7 +84,7 @@ namespace AnimeWPF
             if (animeTable.SelectedItem != null)
             {
                 var animeName = animeTable.SelectedItem.ToString();
-                _animeManager.SetSelectedAnimeByTitle(animeName);
+                animeManager.SetSelectedAnimeByTitle(animeName);
 
                 //Trace.WriteLineIf(ListBoxAnimeTitles.SelectedItem.ToString().Contains("BLOG"), $"BLOG was selected");
                 PopulateFields();
@@ -90,7 +93,7 @@ namespace AnimeWPF
         private void PopulateListBox()
         {
             var lists = new List<WPFTable>();
-            var allAnimeList = _animeManager.RetrieveSpecificAnime(_filter);
+            var allAnimeList = animeManager.RetrieveSpecificAnime(filter);
             foreach (var item in allAnimeList)
             {
                 lists.Add(new WPFTable()
@@ -105,25 +108,25 @@ namespace AnimeWPF
                 });
             }
             animeTable.ItemsSource = lists;
-            NumberToWatch.Text = _animeManager.RetrieveSpecificAnime(1).Count.ToString();
-            NumberWatching.Text = _animeManager.RetrieveSpecificAnime(2).Count.ToString();
-            NumberWatched.Text = _animeManager.RetrieveSpecificAnime(3).Count.ToString();
-            NumberAll.Text = _animeManager.RetrieveSpecificAnime(0).Count.ToString();
+            NumberToWatch.Text = animeManager.RetrieveSpecificAnime(1).Count.ToString();
+            NumberWatching.Text = animeManager.RetrieveSpecificAnime(2).Count.ToString();
+            NumberWatched.Text = animeManager.RetrieveSpecificAnime(3).Count.ToString();
+            NumberAll.Text = animeManager.RetrieveSpecificAnime(0).Count.ToString();
         }
         private void PopulateFields()
         {
-            if (_animeManager.SelectedAnime != null)
+            if (animeManager.SelectedAnime != null)
             {
-                TextEpisode.Text = _animeManager.SelectedAnime.EpisodeWatched.ToString();
-                TextDetails.Text = $"Title: {_animeManager.SelectedAnime.AnimeName}" +
-                                    $"\nRank: {_animeManager.SelectedAnime.Rank}" +
-                                    $"\nEpisodes: {_animeManager.SelectedAnime.Episode}" +
-                                    $"\nYear: {_animeManager.SelectedAnime.ReleaseYear}" +
-                                    $"\nStatus: {_animeManager.SelectedAnime.Status}";
-                TextSummary.Text = $"Summary\n\n{_animeManager.SelectedAnime.Summary}";
+                TextEpisode.Text = animeManager.SelectedAnime.EpisodeWatched.ToString();
+                TextDetails.Text = $"Title: {animeManager.SelectedAnime.AnimeName}" +
+                                    //$"\nRank: {animeManager.SelectedAnime.Rank}" +
+                                    $"\nEpisodes: {animeManager.SelectedAnime.Episode}" +
+                                    $"\nYear: {animeManager.SelectedAnime.ReleaseYear}" +
+                                    $"\nStatus: {animeManager.SelectedAnime.Status}";
+                TextSummary.Text = $"Summary\n\n{animeManager.SelectedAnime.Summary}";
 
-                Picture(_animeManager.SelectedAnime.Picture);
-                UpToDatePicture(_animeManager.SelectedAnime.UpToDate);
+                Picture(animeManager.SelectedAnime.Picture);
+                UpToDatePicture(animeManager.SelectedAnime.UpToDate);
             }
         }
         private void RefreshPage()
@@ -138,13 +141,14 @@ namespace AnimeWPF
             if (TextSearch.Text != null || TextSearch.Text == "")
             {
                 var lists = new List<WPFTable>();
-                var allAnimeList = _animeManager.RetrieveSearchedAnime(TextSearch.Text);
+                var allAnimeList = animeManager.RetrieveSearchedAnime(TextSearch.Text);
                 foreach (var item in allAnimeList)
                 {
                     lists.Add(new WPFTable()
                     {
                         Date = Date(item.UpToDate),
                         Title = item.AnimeName,
+                        Episode = item.EpisodeWatched.ToString(),
                         Watch = item.Watch,
                         Ratings = Rate(item.Rating),
                         Status = Status(item.Status),
@@ -158,13 +162,13 @@ namespace AnimeWPF
         #region Ratings
         private void UpdateRate(int? rate)
         {
-            _animeManager.UpdateWatchlist(
-                  animeTitle: _animeManager.SelectedAnime.AnimeName,
+            animeManager.UpdateWatchlist(
+                  animeTitle: animeManager.SelectedAnime.AnimeName,
                   rating: rate,
-                  more: _animeManager.SelectedAnime.More,
-                  watch: _animeManager.SelectedAnime.Watch,
-                  episodeWatched: _animeManager.SelectedAnime.EpisodeWatched,
-                  upToDate: _animeManager.SelectedAnime.UpToDate);
+                  more: animeManager.SelectedAnime.More,
+                  watch: animeManager.SelectedAnime.Watch,
+                  episodeWatched: animeManager.SelectedAnime.EpisodeWatched,
+                  upToDate: animeManager.SelectedAnime.UpToDate);
 
             RefreshPage();
             PopulateListBox();
@@ -198,13 +202,13 @@ namespace AnimeWPF
         #region Watchings
         private void UpdateWatch(string watch)
         {
-            _animeManager.UpdateWatchlist(
-                  animeTitle: _animeManager.SelectedAnime.AnimeName,
-                  rating: _animeManager.SelectedAnime.Rating,
-                  more: _animeManager.SelectedAnime.More,
+            animeManager.UpdateWatchlist(
+                  animeTitle: animeManager.SelectedAnime.AnimeName,
+                  rating: animeManager.SelectedAnime.Rating,
+                  more: animeManager.SelectedAnime.More,
                   watch: watch,
-                  episodeWatched: _animeManager.SelectedAnime.EpisodeWatched,
-                  upToDate: _animeManager.SelectedAnime.UpToDate);
+                  episodeWatched: animeManager.SelectedAnime.EpisodeWatched,
+                  upToDate: animeManager.SelectedAnime.UpToDate);
 
             RefreshPage();
             PopulateListBox();
@@ -230,16 +234,16 @@ namespace AnimeWPF
         #region Episodes
         private void UpdateEpisode(int? episode)
         {
-            _animeManager.UpdateWatchlist(
-                  animeTitle: _animeManager.SelectedAnime.AnimeName,
-                  rating: _animeManager.SelectedAnime.Rating,
-                  more: _animeManager.SelectedAnime.More,
-                  watch: _animeManager.SelectedAnime.Watch,
+            animeManager.UpdateWatchlist(
+                  animeTitle: animeManager.SelectedAnime.AnimeName,
+                  rating: animeManager.SelectedAnime.Rating,
+                  more: animeManager.SelectedAnime.More,
+                  watch: animeManager.SelectedAnime.Watch,
                   episodeWatched: episode,
-                  upToDate: _animeManager.SelectedAnime.UpToDate);
+                  upToDate: animeManager.SelectedAnime.UpToDate);
 
             RefreshPage();
-            TextEpisode.Text = _animeManager.SelectedAnime.EpisodeWatched.ToString();
+            TextEpisode.Text = animeManager.SelectedAnime.EpisodeWatched.ToString();
         }
         private void ButtonEpisodeUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -295,12 +299,12 @@ namespace AnimeWPF
         #region Up to Date
         private void UpdateDate(DateTime? dateTime)
         {
-            _animeManager.UpdateWatchlist(
-                  animeTitle: _animeManager.SelectedAnime.AnimeName,
-                  rating: _animeManager.SelectedAnime.Rating,
-                  more: _animeManager.SelectedAnime.More,
-                  watch: _animeManager.SelectedAnime.Watch,
-                  episodeWatched: _animeManager.SelectedAnime.EpisodeWatched,
+            animeManager.UpdateWatchlist(
+                  animeTitle: animeManager.SelectedAnime.AnimeName,
+                  rating: animeManager.SelectedAnime.Rating,
+                  more: animeManager.SelectedAnime.More,
+                  watch: animeManager.SelectedAnime.Watch,
+                  episodeWatched: animeManager.SelectedAnime.EpisodeWatched,
                   upToDate: dateTime);
 
             RefreshPage();
@@ -319,13 +323,13 @@ namespace AnimeWPF
         #region More
         private void UpdateMore(string more)
         {
-            _animeManager.UpdateWatchlist(
-                  animeTitle: _animeManager.SelectedAnime.AnimeName,
-                  rating: _animeManager.SelectedAnime.Rating,
+            animeManager.UpdateWatchlist(
+                  animeTitle: animeManager.SelectedAnime.AnimeName,
+                  rating: animeManager.SelectedAnime.Rating,
                   more: more,
-                  watch: _animeManager.SelectedAnime.Watch,
-                  episodeWatched: _animeManager.SelectedAnime.EpisodeWatched,
-                  upToDate: _animeManager.SelectedAnime.UpToDate);
+                  watch: animeManager.SelectedAnime.Watch,
+                  episodeWatched: animeManager.SelectedAnime.EpisodeWatched,
+                  upToDate: animeManager.SelectedAnime.UpToDate);
 
             RefreshPage();
             PopulateListBox();
@@ -351,7 +355,7 @@ namespace AnimeWPF
         #region Filters
         private void ButtonFilterReset_Click(object sender, RoutedEventArgs e)
         {
-            _filter = null;
+            filter = null;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -362,7 +366,7 @@ namespace AnimeWPF
         }
         private void ButtonFilterRate_Click(object sender, RoutedEventArgs e)
         {
-            _filter = 4;
+            filter = 4;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -373,7 +377,7 @@ namespace AnimeWPF
         }
         private void ButtonFilterMore_Click(object sender, RoutedEventArgs e)
         {
-            _filter = 5;
+            filter = 5;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -384,7 +388,7 @@ namespace AnimeWPF
         }
         private void ButtonFilterToWatch_Click(object sender, RoutedEventArgs e)
         {
-            _filter = 1;
+            filter = 1;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -395,7 +399,7 @@ namespace AnimeWPF
         }
         private void ButtonFilterWatching_Click(object sender, RoutedEventArgs e)
         {
-            _filter = 2;
+            filter = 2;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -406,7 +410,7 @@ namespace AnimeWPF
         }
         private void ButtonFilterWatched_Click(object sender, RoutedEventArgs e)
         {
-            _filter = 3;
+            filter = 3;
             TextEpisode.Text = "";
             TextDetails.Text = "";
             TextSummary.Text = "";
@@ -416,8 +420,6 @@ namespace AnimeWPF
             UpToDatePicture(null);
         }
 
-        #endregion
-
-        
+        #endregion       
     }
 }

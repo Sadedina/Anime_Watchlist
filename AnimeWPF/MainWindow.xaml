@@ -27,7 +27,7 @@
         <TextBox x:Name="TextEpisode"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,280,915,350"></TextBox>
         <TextBox x:Name="TextReleaseYear"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,347,915,285"></TextBox>
         <TextBox x:Name="TextStatus"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,416,915,215"></TextBox>
-        <TextBox x:Name="TextRank"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,483,915,145"></TextBox>
+        <TextBox x:Name="TextRank" IsReadOnly="True" Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,483,915,145"></TextBox>
         <TextBox x:Name="TextMore"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="45,551,915,85"></TextBox>
         <TextBox x:Name="TextSummary"  Background="Black" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="#FFC7C7C7" BorderBrush="#FFC7C7C7" Foreground="White" Opacity="0.8" Margin="305,374,410,28" TextWrapping="WrapWithOverflow" FontSize="14"></TextBox>
 
