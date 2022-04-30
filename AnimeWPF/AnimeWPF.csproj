@@ -80,7 +80,6 @@
     <None Remove="Animes\Durarara!! x2 ten.png" />
     <None Remove="Animes\Durarara!!.png" />
     <None Remove="Animes\Dusk maiden of amnesia.png" />
-    <None Remove="Animes\each boy riverside.png" />
     <None Remove="Animes\Edens zero.png" />
     <None Remove="Animes\Elfen lied.png" />
     <None Remove="Animes\Fire force 2.png" />
@@ -124,7 +123,6 @@
     <None Remove="Animes\March comes in like a lion.png" />
     <None Remove="Animes\Masamune-kun%27s revenge.png" />
     <None Remove="Animes\Miss kobayashi%27s - mini dragon 3.png" />
-    <None Remove="Animes\Miss kobayashi%27s dragon maid s 4.jpg" />
     <None Remove="Animes\Miss kobayashi%27s dragon maid s 4.png" />
     <None Remove="Animes\Miss kobayashi%27s dragon maid specials 2.png" />
     <None Remove="Animes\Miss kobayashi%27s dragon maid.png" />
@@ -208,7 +206,6 @@
     <None Remove="Animes\Wotakoi - love is hard for otaku.png" />
     <None Remove="Animes\Zombie land saga revenge.png" />
     <None Remove="Animes\Zombie land saga.png" />
-    <None Remove="Background\1Star.jpg" />
     <None Remove="Background\1Star.png" />
     <None Remove="Background\2Star.png" />
     <None Remove="Background\3Star.png" />
@@ -216,19 +213,10 @@
     <None Remove="Background\5Star.png" />
     <None Remove="Background\Ace.jpg" />
     <None Remove="Background\ace1.jpg" />
-    <None Remove="Background\AHO-GIRL.png" />
-    <None Remove="Background\ANGEL BEATS!.png" />
     <None Remove="Background\anime.png" />
     <None Remove="Background\anime1.png" />
     <None Remove="Background\anime3.png" />
-    <None Remove="Background\ANOTHER.png" />
     <None Remove="Background\Arrow.png" />
-    <None Remove="Background\Backflip!!.png" />
-    <None Remove="Background\Banana fish.png" />
-    <None Remove="Background\Battle game in 5 seconds.png" />
-    <None Remove="Background\Beelzebub.png" />
-    <None Remove="Background\Burning kabaddi.png" />
-    <None Remove="Background\Combatants will be dispatched!.png" />
     <None Remove="Background\Completed.png" />
     <None Remove="Background\Cross.png" />
     <None Remove="Background\DownDate.png" />
@@ -236,8 +224,6 @@
     <None Remove="Background\Hai.jpg" />
     <None Remove="Background\Hai1.jpg" />
     <None Remove="Background\Hai3.jpg" />
-    <None Remove="Background\I%27m standing on a million lives.png" />
-    <None Remove="Background\Jujutsu kaisen.png" />
     <None Remove="Background\Number.png" />
     <None Remove="Background\One.jpg" />
     <None Remove="Background\One1.jpg" />
@@ -247,18 +233,14 @@
     <None Remove="Background\UpDate.png" />
     <None Remove="Background\X.png" />
     <None Remove="Background\XR.png" />
-    <None Remove="Hai.jpg" />
-    <None Remove="Hai1.jpg" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Google.Apis.Compute.v1" Version="1.54.0.2415" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AnimeBusiness\AnimeBusiness.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Animes\7 seeds 2.png" />
     <Resource Include="Animes\7 seeds.png" />
@@ -484,5 +466,17 @@
     <Resource Include="Background\X.png" />
     <Resource Include="Background\XR.png" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
