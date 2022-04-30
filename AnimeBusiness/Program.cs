@@ -8,7 +8,7 @@ namespace AnimeBusiness
         public static void Main()
         {
             // Change null into Maybe in More coloumn
-            Change.ChangeNullToMaybe();
+            Change.PrintAllAnimes();
 
             // Print all the animes table in SQL script format
             //Change.PrintAllAnimes();
